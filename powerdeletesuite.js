@@ -1,28 +1,7 @@
 var pd = {
   version: "1.4.9",
   bookmarkver: "1.4",
-  editStrings: [
-    "I love ice cream.",
-    "I hate beer.",
-    "My favorite color is blue.",
-    "I enjoy reading books.",
-    "I like to go hiking.",
-    "My favorite movie is Inception.",
-    "I enjoy playing video games.",
-    "I like to travel.",
-    "I'm learning to play the guitar.",
-    "I enjoy cooking.",
-    "I love listening to music.",
-    "I enjoy watching the sunset.",
-    "I like to explore new places.",
-    "I find joy in reading a good book.",
-    "I appreciate a good cup of coffee.",
-    "I enjoy spending time with my friends.",
-    "I like learning new things.",
-    "I find peace in long walks.",
-    "I enjoy the sound of rain.",
-    "I love the smell of fresh bread.",
-  ],
+  editString: "edit: null",
   init: function () {
     pd.checks.versions();
     if (window.pd_processing !== true) {
@@ -34,7 +13,7 @@ var pd = {
       } else {
         if (
           confirm(
-            "This script can only be run from your own user profile on reddit. Would you like to go there now?"
+            "This script can only be run from your own user profile on reddit. Would you like to go there now?",
           )
         ) {
           document.location = "https://old.reddit.com/u/me/overview";
@@ -51,11 +30,11 @@ var pd = {
         ) {
           if (
             confirm(
-              "There's been an update to the bookmarklet. Would you like to go to the Github repo in order to get the latest version?"
+              "There's been an update to the bookmarklet. Would you like to go to the Github repo in order to get the latest version?",
             )
           ) {
             alert(
-              'Sadly, there]\'s no way to automatically update the bookmark. :/\nScroll down to the "Install PowerDeleteSuite" button on the github page. Replace your CURRENT bookmark with the one found there to install the latest bookmark.'
+              'Sadly, there]\'s no way to automatically update the bookmark. :/\nScroll down to the "Install PowerDeleteSuite" button on the github page. Replace your CURRENT bookmark with the one found there to install the latest bookmark.',
             );
             document.location.href = "https://github.com/j0be/PowerDeleteSuite";
             return false;
@@ -73,18 +52,18 @@ var pd = {
             confirm(
               "You've gotten the latest update! You are now running PowerDeleteSuite v" +
                 pd.version +
-                ". Would you like to open the changelog in a new tab?"
+                ". Would you like to open the changelog in a new tab?",
             )
           ) {
             $.ajax({ url: "/r/PowerDeleteSuite/new.json" }).then(
               function (data) {
                 window.open(
-                  "https://reddit.com" + data.data.children[0].data.permalink
+                  "https://reddit.com" + data.data.children[0].data.permalink,
                 );
               },
               function () {
                 window.open("https://reddit.com/r/PowerDeleteSuite");
-              }
+              },
             );
           }
         }
@@ -149,7 +128,7 @@ var pd = {
         },
         function () {
           alert("Error retreiving CSS from /r/PowerDeleteSuite");
-        }
+        },
       );
     },
     applyCentral: function () {
@@ -175,7 +154,7 @@ var pd = {
         },
         function () {
           alert("Error retreiving markup from /r/PowerDeleteSuite");
-        }
+        },
       );
     },
     applySubList: function () {
@@ -189,7 +168,7 @@ var pd = {
         return a.toLowerCase().localeCompare(b.toLowerCase());
       });
       $("#pd__sub-list").append(
-        '<div><a class="ind mass_sel sel_all">Select All</a><a class="ind mass_sel sel_none">Select None</a></div>'
+        '<div><a class="ind mass_sel sel_all">Select All</a><a class="ind mass_sel sel_none">Select None</a></div>',
       );
       for (i = 0; i < sub_arr.length; i++) {
         sid = "sub--" + sub_arr[i];
@@ -206,7 +185,7 @@ var pd = {
             sid +
             "'>" +
             sub_arr[i] +
-            "</label></div>"
+            "</label></div>",
         );
       }
       $("#side-mod-list li").each(function () {
@@ -214,7 +193,7 @@ var pd = {
           ".sub--" +
             $(this)
               .text()
-              .replace(/\/?[ru]\//, "")
+              .replace(/\/?[ru]\//, ""),
         ).prepend("<b class='m'>[M]</b>");
       });
     },
@@ -229,7 +208,7 @@ var pd = {
             ($("#pd__submissions").is(":checked") ? 8 : 0) +
               ($("#pd__comments").is(":checked") ? 4 : 0) +
               ($("#pd__comments-edit").is(":checked") ? 12 : 0),
-            12
+            12,
           ),
           numItems: 0,
           donePages: 0,
@@ -276,7 +255,7 @@ var pd = {
           enabled: $("#pd__subreddits").is(":checked"),
           list: $(
             "#pd__sub-list input" +
-              ($("#pd__subreddits").is(":checked") ? ":checked" : "")
+              ($("#pd__subreddits").is(":checked") ? ":checked" : ""),
           ).map(function () {
             return $(this).attr("data-sub");
           }),
@@ -343,14 +322,14 @@ var pd = {
         var greaterThan = $(this).hasClass("greater");
         $(this).attr(
           "class",
-          "gt-toggle hidden " + (greaterThan ? "less" : "greater")
+          "gt-toggle hidden " + (greaterThan ? "less" : "greater"),
         );
       });
       $(".num-only").blur(function () {
         $(this).val(
           $(this)
             .val()
-            .replace(/[^\d-]/g, "")
+            .replace(/[^\d-]/g, ""),
         );
         $(this).change();
       });
@@ -459,7 +438,7 @@ var pd = {
         }
         localStorage.setItem(
           "pd_storage",
-          JSON.stringify($("#pd__form").serializeArray())
+          JSON.stringify($("#pd__form").serializeArray()),
         );
       } else {
         localStorage.removeItem("pd_storage");
@@ -540,7 +519,7 @@ var pd = {
               pd.task.info.errors++;
               if (
                 confirm(
-                  "Reddit seems to be under heavy load. Would you like to continue processing?"
+                  "Reddit seems to be under heavy load. Would you like to continue processing?",
                 )
               ) {
                 pd.actions.page.shift();
@@ -556,7 +535,7 @@ var pd = {
               confirm(
                 "Error getting " +
                   pd.task.paths.sections[0] +
-                  " page. Would you like to retry?"
+                  " page. Would you like to retry?",
               )
             ) {
               pd.actions.page.handle();
@@ -564,7 +543,7 @@ var pd = {
               pd.actions.page.shift();
               pd.actions.page.next();
             }
-          }
+          },
         );
       },
     },
@@ -644,16 +623,16 @@ var pd = {
         if (pd.exportIds.indexOf(item.data.id) == -1) {
           str = "";
           str += pd.helpers.csvCell(
-            pd.helpers.csvEscape(item.data.title ? item.data.title : "")
+            pd.helpers.csvEscape(item.data.title ? item.data.title : ""),
           );
           str += pd.helpers.csvCell(
             pd.helpers.csvEscape(
               item.data.body
                 ? item.data.body
                 : item.data.selftext
-                ? item.data.selftext
-                : ""
-            )
+                  ? item.data.selftext
+                  : "",
+            ),
           );
           str += pd.helpers.csvCell(
             item.data.permalink
@@ -664,13 +643,13 @@ var pd = {
                   item.data.link_id.replace(/^t\d_/, "") +
                   "/x/" +
                   item.data.id +
-                  "?context=3"
+                  "?context=3",
           );
           str += pd.helpers.csvCell(item.data.score);
           str += pd.helpers.csvCell(item.data.created_utc);
           str += pd.helpers.csvCell(
             (item.pdEdited ? "edited " : "") +
-              (item.pdDeleted ? "deleted " : "")
+              (item.pdDeleted ? "deleted " : ""),
           );
           pd.exportItems.push(str);
           pd.exportIds.push(item.data.id);
@@ -701,7 +680,7 @@ var pd = {
                 confirm(
                   "Error deleting " +
                     (item.kind == "t3" ? "post" : "comment") +
-                    ", would you like to retry?"
+                    ", would you like to retry?",
                 )
               ) {
                 pd.actions.children.handleSingle();
@@ -709,7 +688,7 @@ var pd = {
                 pd.actions.children.finishItem();
                 pd.actions.children.handleGroup();
               }
-            }
+            },
           );
         } else {
           pd.task.items[0].pdDeleted = true;
@@ -721,14 +700,12 @@ var pd = {
     edit: function (item) {
       setTimeout(() => {
         if (pd.performActions) {
-          var randomEditString =
-            pd.editStrings[Math.floor(Math.random() * pd.editStrings.length)];
           $.ajax({
             url: "/api/editusertext",
             method: "post",
             data: {
               thing_id: item.data.name,
-              text: randomEditString,
+              text: pd.editString,
               id: "#form-" + item.data.name,
               r: item.data.subreddit,
               uh: pd.config.uh,
@@ -745,13 +722,13 @@ var pd = {
                 !confirm(
                   "Error editing " +
                     (item.kind == "t3" ? "post" : "comment") +
-                    ", would you like to retry?"
+                    ", would you like to retry?",
                 )
               ) {
                 item.pdEdited = true;
               }
               pd.actions.children.handleSingle();
-            }
+            },
           );
         } else {
           pd.task.items[0].pdEdited = true;
@@ -774,7 +751,7 @@ var pd = {
             pd.task.paths.sorts[0] +
             "/" +
             pd.task.paths.timeframes[0] +
-            "</small>"
+            "</small>",
         );
       pd.task.info.numPages =
         pd.task.info.donePages +
@@ -784,7 +761,7 @@ var pd = {
         "width",
         Math.round((1000 * pd.task.info.donePages) / pd.task.info.numPages) /
           10 +
-          "%"
+          "%",
       );
       $("#progress_page .text")
         .attr("data-top", pd.task.info.donePages)
@@ -794,7 +771,7 @@ var pd = {
           "width",
           Math.round((1000 * pd.task.info.doneItems) / pd.task.info.numItems) /
             10 +
-            "%"
+            "%",
         );
         $("#progress_item .text")
           .attr("data-top", pd.task.info.doneItems)
@@ -825,12 +802,12 @@ var pd = {
         if (!!pd.task.info.ignoreReasons[key]) {
           if ($(".progress__byline .ignored .reasons ." + key).length == 0) {
             $(".progress__byline .ignored .reasons").prepend(
-              '<div class="' + key + '">' + key + ": </div>"
+              '<div class="' + key + '">' + key + ": </div>",
             );
           }
           $(".progress__byline .ignored .reasons ." + key).attr(
             "data-num",
-            pd.task.info.ignoreReasons[key]
+            pd.task.info.ignoreReasons[key],
           );
         }
       }
@@ -840,7 +817,7 @@ var pd = {
         pd.task.info.ignored > 0 &&
           (pd.task.info.deleted > 0 || pd.task.info.edited > 0)
           ? "twocol"
-          : "onecol"
+          : "onecol",
       );
 
       pd.task.info.ajaxCalls =
@@ -867,13 +844,13 @@ var pd = {
         $("#pd__central .complete .summary").html(
           "<p>Completed after making " +
             pd.task.info.ajaxCalls +
-            ' calls to the reddit servers.</p> <p>If you need to re run the script, <a class="restart">click here to go back to the beginning!</a></p>'
+            ' calls to the reddit servers.</p> <p>If you need to re run the script, <a class="restart">click here to go back to the beginning!</a></p>',
         );
       } else {
         $("#pd__central .complete .summary").html(
           "<p>All Done! It seems like all " +
             pd.task.info.ignored +
-            ' items we came across were ignored.</p> <p>If you need to re run the script, <a class="restart">click here to go back to the beginning!</a></p>'
+            ' items we came across were ignored.</p> <p>If you need to re run the script, <a class="restart">click here to go back to the beginning!</a></p>',
         );
       }
       $("#pd__central .complete .summary .restart").click(function () {
@@ -894,14 +871,14 @@ var pd = {
           encodeURIComponent(debugInfo) +
           '" target="_blank">Send /u/j0be a message with your current settings.</a></div>' +
           "<div><small>(for privacy, subreddit list is not included)</small></div>" +
-          "</h3>"
+          "</h3>",
       );
 
       if (pd.task.config.isExporting && pd.exportItems.length > 0) {
         $("#pd__central .complete .goodbye").prepend(
           '<hr/><a class="export-button" href=\'data:text/csv;charset=utf-8,' +
             pd.exportItems.join("%0A") +
-            '\' download="PowerDeleteSuiteExport.csv">Download Exported Items</a>'
+            '\' download="PowerDeleteSuiteExport.csv">Download Exported Items</a>',
         );
       }
 
@@ -911,7 +888,7 @@ var pd = {
   },
   error: function () {
     var reset = confirm(
-      "We ran into an error. Why not tell /u/j0be what you were doing to break it?\r\n\r\nWould you like to restart the script?"
+      "We ran into an error. Why not tell /u/j0be what you were doing to break it?\r\n\r\nWould you like to restart the script?",
     );
     window.pd_processing = false;
     if (reset) {
